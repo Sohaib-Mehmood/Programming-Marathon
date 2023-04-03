@@ -1,2 +1,37 @@
 Object Oriented Programming:
-	- 
+	- OOP is a fundamental and most popular Programming paradigm used by nearly every developer at some point in their career for the software developemnt.
+
+Structure of Object Oriented Programming
+	- Classes
+		- user defined data types.
+		- where we create a blueprint for the structure of methods and attributes.
+		- classes contains fields of attributes and methods of behaviors.
+		- Example: Simple Person example;
+		- class Person{
+			//constructor function
+			constructor(name, age){
+				this.name = name;
+				this.age = age;
+			}
+
+			getName(){
+				return this.name;
+			}
+
+			getAge(){
+				return this.age;
+			}
+		}
+	- objects
+		- these are the instances of class created with specific data.
+		- example: for the above person class
+		- cosnt david = new Person("david", 23);
+
+		- a new object is being created with name david
+		- the constructor runs name & age arguments, and assigns values
+	- attributes
+		- these are the information that is being stored.
+		- these are defined inside the class template and represents the state of an object.
+
+	- methods
+		- these are the functions defined inside the class template and describes the behavior of an object.
