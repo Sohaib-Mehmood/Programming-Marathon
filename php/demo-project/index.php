@@ -7,6 +7,12 @@
     <title>Demo</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>
+    /** below is the php syntax for printing the string on screen.*/
+
+    <?php
+        echo "hello, world: Sohaib";
+    ?>
+    </h1>
 </body>
 </html>
