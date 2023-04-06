@@ -36,8 +36,36 @@ Structure of Object Oriented Programming
 	- methods
 		- these are the functions defined inside the class template and describes the behavior of an object.
 	
-	- constructor
+	- constructor method
 		- we cannot have more than 1 constructor function in javascript class.
+		- javascript allows us to use the parent class constructor through "super" keyword, followed by the extends keyword after the className.
+		- constructor example:
+			class Person{
+				constructor(name, age){
+					this.name = name;
+					this.age = age;
+				}
+			}
+		- "super" keyword example:
+			- class Sohaib extends Person{
+				constructor(email, empId){
+					super();
+					this.email = email;
+					this.empId = empId;
+				}
+			}
+		- static method
+			- static method belogns to the class itself directly, instead of the instance of that object.
+			- we can have more than one static methods inside the class.
+
+			- but we cannot use this keyword to directly call a static method within a non-static method
+			- example
+				- class Test{
+					static display(){
+						return "statis method is invoked";
+					}
+				}
+				console.log(Test.display())
 
 unnamed class expression:
 	- similar to the anonymous functions, we can also make the classes as well
@@ -63,3 +91,7 @@ Prototype Objects:
 		}
 		let p1 = new person("sohaib", "mehmood");
 		console.log(p1.fullName()); // sohaib mehmood
+
+4 pillar of Object Oriented Programming:
+	- Encapsulation
+		- it is the process of binding the attributes with functions 
