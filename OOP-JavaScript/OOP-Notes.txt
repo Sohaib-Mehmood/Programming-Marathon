@@ -35,3 +35,31 @@ Structure of Object Oriented Programming
 
 	- methods
 		- these are the functions defined inside the class template and describes the behavior of an object.
+	
+	- constructor
+		- we cannot have more than 1 constructor function in javascript class.
+
+unnamed class expression:
+	- similar to the anonymous functions, we can also make the classes as well
+	- example
+		- const person = Class{
+			constructor(name, age){
+				this.name = name;
+				this.age = age;
+			}
+		}
+Prototype Objects:
+	- javascript is a Prototype based language that facilitates the objects to acquire properties and features from one another.
+	- whenever a new function is created, the Prototype functionality is automatically added to it.
+	- syntac
+		- className.prototype.methodName
+	example:
+		function person(fName, lName){
+			this.fName = fName;
+			this.lName = lName;
+		}
+		person.prototype.fullName = function(){
+			return this.fName + " " + this.lname;
+		}
+		let p1 = new person("sohaib", "mehmood");
+		console.log(p1.fullName()); // sohaib mehmood
