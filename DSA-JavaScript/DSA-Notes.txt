@@ -1,0 +1,281 @@
+Big O notation
+    - O(1)
+        - constants
+        - no loops
+    - O(log n)
+        - logarithmic
+        - ususally searching Algorithms have log(n), if they are sorted (like binary search)
+    - O(n)
+        - linear
+        - for loops, while loops
+    - O(2powerN)
+        - exponential
+        - recursive Algorithms that solve a problem of size n.
+    - O(nlog(n))
+        - log linear
+        - sorting operations ususally
+    - O(n!)
+        - means that you are adding loop for every element.
+    - O(n2)
+        - quadratic
+        - every element in a collection needs to be compared to every other element. (two nested loops).
+
+    - iterating through half a collection is still O(n)
+    - for 2 seperate collections
+        - O(a*b)
+
+    - what causes time in a function?
+        - operations
+            - +, -, *, /
+        - comparisons
+            - <, >, ==
+        - looping
+            - for, while
+        - outside function calls
+            - function();
+    Rule books:
+        - always should be worst case
+        - remove constants
+        - different inputs should have different variables. O(a+b)
+            - if a and b arrays are nested then, O(a*b)
+        - drop non-dominant terms
+
+Data Structure:
+    - Data Structure is a storage that is used to store and organize data. It is a way of arranging data on a computer so that it can be accessed and updated efficently
+    - It totally depends on the requirement and need of the project, what data Structure to be used and why.
+    - for example:
+        - if you want to store the data sequentially in the memory, then you can go for the Arrays and LinkedList data Structure.
+
+    Types of Data Structure:
+        - Linear Data Structure
+            - all the items are present on a single layer
+                - Arrays
+                - LinkedList
+                - Stacks
+                - Queues
+                - heap
+        - Non-Linear Data Structure
+            - the data itesm are present at different layers.
+                - Graphs
+                - Trees
+Algorithms:
+    - Steps of problem to solve a problem.
+    - example:
+        - problem is to make a pizza.
+            - Steps
+                - heat the oven to 550 F
+                - Knead the dough
+                - add toppigs
+                - etc.
+Stacks
+    - LIFO data structure. (Last in First Out) / FILO (First in Last out)
+    - methods availabe
+        - lookup O(n)
+        - pop O(1)
+        - push O(1)
+        - peek O(1)
+    - example
+        - browser web pages, navigations, redo, undo
+    - Benefits
+        - fast operations
+        - fast peek
+        - ordered
+    - evaluation of post-fix expressions like ab+
+        - example
+            - str = "2 3 1 * + 9 -"
+            output = 4
+            explanation:
+                - 2 + (3*1) -9 = 5 -9 = -4
+Queues
+    - FIFO data structure. (First in First out)
+    - methods availabe
+        - lookup O(n)
+        - enqueue O(1) //add, push
+        - dequeue O(1) // pop, remove
+        - peek O(1)
+    - example
+        - printing queue, ticket booking
+    - ususally we are not interested in lookup, we are only interested in enqueue and dequeue operations.
+
+- Priority Queues
+    - each element of the Priority queue has a priority associated to it.
+    - lowest priority elements are removed First
+    - element will be added in the queue as per the priority.
+
+    - we use to store the elements in the priority queue in the heap structure.
+    - when using priority queue, the highest priority element will always be the root element.
+        - similar is with the min-heap as well.
+
+    - applications
+        - task scheduling, shortest path, heap sorting.
+
+    - usage
+        - min-heap
+        - max-heap
+
+        - becuase they have O(1) for peek.
+        - remove: O(log N)
+        - Add: O(log N)
+
+    - implementation
+        -   // enqueue function to add element
+            // to the queue as per priority
+            enqueue(element, priority)
+            {
+                // creating object from queue element
+                var qElement = new QElement(element, priority);
+                var contain = false;
+            
+                // iterating through the entire
+                // item array to add element at the
+                // correct location of the Queue
+                for (var i = 0; i < this.items.length; i++) {
+                    if (this.items[i].priority > qElement.priority) {
+                        // Once the correct location is found it is
+                        // enqueued
+                        this.items.splice(i, 0, qElement);
+                        contain = true;
+                        break;
+                    }
+                }
+            
+                // if the element have the highest priority
+                // it is added at the end of the queue
+                if (!contain) {
+                    this.items.push(qElement);
+                }
+            }
+
+LinkedList
+    - linear data structure based on nodes connect together.
+        - nodes consists of
+            - value
+            - pointer //nextPtr, prevPtr
+        - example
+            - class Node{
+                constructor(value){
+                    this.value = value;
+                    this.next = next;
+                }
+            }
+            - class LinkedList{
+                constructor(value){
+                    this.head = {
+                        this.value = 1;
+                        this.next = null;
+                    }
+                    this.tail = this.head;
+                    this.length;
+                }
+            }
+
+Dynamic Arrays
+    - arrays in javascript are dynamic by nature, means that we can add elements dynamically.
+    - javascript is not type dependent, so there is no static array.
+
+    - decleration ways:
+        - by using literals
+            - var arr = ["hi", "hello", "how"];
+        - by using the default constructor (it makes the array dynamic by default)
+            - var arr = new Array();
+        - by using parameterized constructor
+            - var array = new Array("hi", "hello", "how")
+
+Linear search vs Binary search
+    - Linear search
+        - it is also called as sequential search, because it starts from the 0th index and iterates over an array, untill the required key is not found.
+        - complexity
+            - O(n)
+    - Binary search
+        - it uses the divide and conquer approach
+        - means that it divides the array from half and checks if key is > or < the mid point.
+        - and meanwhile dominates the side as per the condition.
+
+        - so at every step we are ignoring half of the array untill we found our target element.
+        - complexity
+            - O(log(n))
+
+Bubble Sort
+    - bubble sort compares the element from index 0 and if the 0th index value is greater than 1st index value, then the values get swaped and if 0th index is less than the 1st index value, then nothing happens.
+    - next, iterator comes to the 1st index and repeat the same process again, untill the array is fully sorted.
+    - either in ascending order or descending order.
+    - Algorithm
+        - BubbleSort(array){
+            for i -> 0 to arrayLength 
+                isSwapped <- false
+                for j -> 0 to (arrayLength - i - 1)
+                    if arr[j] > arr[j + 1]
+                        swap(arr[j], arr[j + 1])
+                        isSwapped -> true
+        }
+
+Selection sort
+    - it is a simple and yet efficient sorting algorithm that works by repeadedly selecting the smallest (or largest) element from the unsorted portion of the list and moving it to the sorted protion of the list.
+    - implementation
+        - the algorithm maintains the 2 subarrays in a given array.
+            - the subarray which is already sorted.
+            - the remaining subarray which is unsorted.
+        - in every iteration, the minimum element or maximum element value from the unsorted array is picked up and is placed to the begining or ending of the sorted array.
+        - at every step, the size of sorted array increases and the size of unsorted array decreases.
+
+        - it traverses the array in the sequential manner for the unsorted part of the array.
+
+        - complexity
+            - One loop to select an element of Array one by one = O(N)
+            - Another loop to compare that element with every other Array element = O(N)
+            - Therefore overall complexity = O(N) * O(N) = O(N*N) = O(N2)
+
+insertion sort
+    - it starts from the arr[1] and goes uptill the arr[N].
+    - compares it with the previous one and see if greater/smaller and swaps respectively.
+    - complexity
+        - O(n2)
+Quick sort
+    - based on divide and conquer strategy.
+
+    - The array of elements is divided into parts repeatedly until it is not possible to divide it further.
+    - It is also known as “partition exchange sort”.
+    - It uses a key element (pivot) for partitioning the elements.
+    - One left partition contains all those elements that are smaller than the pivot and one right partition contains all those elements which are greater than the key element.
+    - complexity
+        - O(n2)
+Merge Sort
+    - based on divide and conquer strategy.
+
+    - The elements are split into two sub-arrays (n/2) again and again until only one element is left.
+    - Merge sort uses additional storage for sorting the auxiliary array.
+    - Merge sort uses three arrays where two are used for storing each half, and the third external one is used to store the final sorted list by merging other two and each array is then sorted recursively.
+    - At last, the all sub arrays are merged to make it ‘n’ element size of the array.
+    - complexity
+        - O(n log n)
+
+Recursion
+    - a function calling itself within itself untill a program achieves the desired result.
+    - divide and conquer approach
+    - rules
+        - a recursive algorithm must call itself, recursively.
+        - a recursive algorithm must have a base case.
+        - a recursive algorithm must changes its state and move toward the base case.
+
+Hash Tables
+    - hash tables are also be called as the hash maps, maps, unordered maps, dictionaries, object, search tables, associative array.
+    - different languages have different implementation for it and slight variations on the "hash tables"
+    - for example
+        - javascript: objects
+        - python: dictionaries
+        - java: maps
+        - ruby: hashes
+
+    - Hash tables are very important all across computer science.
+        - sucs as in databases, caches, associative arrays.
+    - hash tables are very important when we want quick access to the certain values.
+    
+Graphs
+DFS
+BFS
+Tree Data structure intro - (also explore generic N-tree terminologies)
+binary search tree
+tree traversals
+
+adjacency matrix
+adjacency list

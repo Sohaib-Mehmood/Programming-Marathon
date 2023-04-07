@@ -94,4 +94,191 @@ Prototype Objects:
 
 4 pillar of Object Oriented Programming:
 	- Encapsulation
-		- it is the process of binding the attributes with functions 
+		- it is the process of binding the attributes with data methods.
+		- it allow us to control the data and validate it.
+			- use var keyword to make data members private.
+			- use setter and getter methods to set/get the data.
+		- we should follow proper Encapsulation while making the class.
+		- example
+			- class Person{
+				constructor(){
+					var name;
+					var age;
+				}
+				setName(name){
+					this.name = name;
+				}
+				getName(){
+					return this.name;
+				}
+				setAge(age){
+					this.age = age;
+				}
+				getAge(){
+					return this.age;
+				}
+			}
+			let objPerson = new Person();
+			objPerson.setName("sohaib");
+			objPerson.setAge(23);
+			console.log(objPerson.getName() + " " + objPerson.getName())
+	- Inheritance
+		- it is the mechanism that allow us to create new classes based on the already existing classes.
+		- it provieds flexibility to the child class to resue the methods declared in the parent class.
+		- for that "extends" keyword is being used by the child class.
+		- example
+			- class Company{
+				constructor(){
+					var compName;
+				}
+				setCompName(compName){
+					this.compName = compName;
+				}
+				getCompName(){
+					return this.compName;
+				}
+			}
+			- class Microsoft{
+				constructor(){
+					super();
+					var empStrength;
+				}
+			}
+	- polymorphism
+		- ploy means shapes and phism means many.
+			- so polymorphism means different shapes.
+		- a class will act differently with different parameters given to it.
+		- it is the ability to call the function with different parameters.
+		- example
+			- class A{
+				display(){
+					console.log("A is invoked.");
+				}
+			}
+			- class B extends A{
+			}
+	- abstraction
+		- it refers to the hiding of the implementation details and only showing the functionality to the users.
+		- we cannot create an instance of the abstact class.
+		- javascript does support built-in abstact classes, however we can enforce one by doing such like below.
+		- example
+			- class Animal {
+				constructor(name) {
+					this.name = name;
+				}
+
+				speak() {
+					throw new Error('This method must be implemented by a subclass');
+				}
+			}
+
+			class Dog extends Animal {
+				speak() {
+					return 'Woof!';
+				}
+			}
+
+			const myDog = new Dog('Fido');
+			console.log(myDog.speak()); // Output: 'Woof!'
+
+Singleton Design Pattern:
+	- it is about the global state management
+	- pre-requisites
+		- classes in js
+		- how to access dom elements
+		- how object.freeze() function works
+	- Design Pattern is a set of generalized instructions that provide a solution to commonly occuring problems in a software Design.
+
+	- In singleton desing pattern, we can create only one instance of a class that can be accessed globally.
+		- means a single object is shared among all the object using that singleton class.
+	- disadvantages
+		- we can get into the race condition.
+	- example
+		//fancyLogger.js
+		- export default class FancyLogger{
+			constructor(){
+				this.logs = []
+			}
+			log(messages){
+				this.logs.push(message);
+				console.log(`FANCY: ${message}`)
+			}
+			printLogCount(){
+				console.log(`${this.logs.length} Logs`)
+			}
+		}
+		//firstUse.js
+		import FancyLogger from './fancyLogger.js'
+		//making object of fancyLogger
+		const objFancyLogger = new FancyLogger();
+
+		export default function logFirstImplementation(){
+			ojbFancyLogger.printLogCount();
+			ojbFancyLogger.log("Second file");
+			ojbFancyLogger.printLogCount();
+		}
+		//secondUse.js
+		import FancyLogger from './fancyLogger.js'
+		//making object of fancyLogger
+		const objFancyLogger = new FancyLogger();
+
+		export default function logSecondImplementation(){
+			ojbFancyLogger.printLogCount();
+			ojbFancyLogger.log("Second file");
+			ojbFancyLogger.printLogCount();
+		}
+
+		//index.js
+		import logFirstImplementation from ''
+		import logSecondImplementation from ''
+
+		logFirstImplementation();
+		logSecondImplementation();
+
+	- converting this code to singleton pattern.
+		- //fancyLogger.js
+		- class FancyLogger{
+			constructor(){
+				if(FancyLogger.instance == null){
+					this.logs = [];
+					fancyLogger.instance = this;
+				}
+				return fancyLogger.instance;
+			}
+			log(messages){
+				this.logs.push(message);
+				console.log(`FANCY: ${message}`)
+			}
+			printLogCount(){
+				console.log(`${this.logs.length} Logs`)
+			}
+		}
+
+		const objFancyLogger = new FancyLogger();
+		Ojbect.Freeze(objFancyLogger);
+		export default objFancyLogger;
+		//firstUse.js
+		import objFancyLogger from './fancyLogger.js'
+		//No need to make object of fancyLogger here
+
+		export default function logFirstImplementation(){
+			ojbFancyLogger.printLogCount();
+			ojbFancyLogger.log("Second file");
+			ojbFancyLogger.printLogCount();
+		}
+		//secondUse.js
+		import objFancyLogger from './fancyLogger.js'
+		//No need to make object of fancyLogger here
+
+		export default function logSecondImplementation(){
+			ojbFancyLogger.printLogCount();
+			ojbFancyLogger.log("Second file");
+			ojbFancyLogger.printLogCount();
+		}
+
+		//index.js
+		import logFirstImplementation from ''
+		import logSecondImplementation from ''
+
+		logFirstImplementation();
+		logSecondImplementation();
