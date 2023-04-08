@@ -269,10 +269,61 @@ Hash Tables
     - Hash tables are very important all across computer science.
         - sucs as in databases, caches, associative arrays.
     - hash tables are very important when we want quick access to the certain values.
-    
+
+    - when to use hash table:
+        - fast lookups
+        - fast inserts
+        - flexible keys
+
+        - unordered
+        - slow key insertion
+    - they are useful when optimizing the code encountered
+        - like nested for loops -> O(n2)
+        - and when it becomes optimized using the hash tables, it becomes O(n)
+    - so it is extremely useful
+    - example
+        - 2 arrays, check if they have similar items.
+    - using for loops
+        - for(){
+            for(){}
+        } // O(n2)
+
+    - using hash tables
+        - {} = firstArray
+        for (2nd array){
+            if(arr1){
+                console.log("yes");
+            }
+        }
+
 Graphs
-DFS
+    - LinkedList is a type of tree, are a type of graph.
+    - most useful and used when it comes to modelling real life.
+
+    - have vertex as nodes
+    - edges as the connections
+
+    - pros
+        - relationships
+    - cons
+        - scaling is hard
+
+    - block chain is built using this data structure.
+
+    - types:
+        - directed
+            - twitter is more directed
+            - useful to represent traffic flow/ one way.
+        - undirected
+            - high ways / facebook friends
+        - weighted
+            - google maps for finding the shortest optimal path
+        - cyclic
+            - when all the nodes are connected circularly
+        - acyclic
+            - used in weighted graph
 BFS
+DFS
 Tree Data structure intro - (also explore generic N-tree terminologies)
 binary search tree
 tree traversals
