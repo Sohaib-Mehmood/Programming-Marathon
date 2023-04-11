@@ -1,0 +1,217 @@
+Rest Api
+	- it is an api that conforms to the constraints of the REST architecture style.
+		- that there should be the client-server communication
+		- statelessness
+		- uniform interface
+HTTP methods
+	- GET
+		- values are visible inside the url above
+		- upto 2048 characters
+		- data is visible to everyone in the url
+	- POST
+		- no characters limit
+		- data is not displayed in the URL.
+	- PUT
+		- it is used to send data to a server to create/update a resource
+	- DELETE
+		- it deletes the specified resource.
+Node.js
+	- a runtime environment for executing js code outside of the browser.
+	- ideal for building highly scalable, data-intensive and real-time apps
+
+	- easy to get started
+	- great for prototyping and agile development
+	- super fast and highly scalable
+
+	- it is not a programming language.
+		- neither it should be compared with any other framework like asp.NET.
+		- it is not a framework it's a runtime engine.
+
+	- benefits
+		- built twice as fast with fewer people
+		- 33% fewer lines of code
+		- 40% fewer files
+		- 2x request/sec
+		- 35% faster response time
+	- javascript everywhere in the node js
+	- cleaner and more consistent codebase
+	- large ecosystem of open source library
+
+	- Node Architecture / Event loop
+		- runtime time environment
+			- js code -> js engine -> machine code
+				- chrome uses V8 (fastest)
+				- firefox uses chkra
+	- it is asynchronous in nature -> non-blocking architecture.
+		- means a single thread is used to handle multiple requests.
+		- example:
+			- waiter is going to take order from multiple customers instead of waiting for once meal to be ready and then taking order from the second one.
+		- this is an example of blocking / synchronous architecture.
+	- when single thread sends the message to one request, it will not wait for the request to send back something, but it will move on the second request untill there's some message/data back from the first request.
+		- and all of this is stored in the event queue
+			- tells whether a data is being generated or not.
+
+	- do not use node for cpu-intensive apps
+		- it should only be used for the data-intensive apps
+
+
+	- in node we are not having document or getelemtntbyid or something like that
+
+	- Node Core
+		- Node Module System
+			- every file in a node app is considered as module.
+				- they are private
+			- for making it publically available, we have to export it.
+
+			- every node application has atleast on main file
+				- like app.js
+			
+			- we can use it as:
+				- global.settimeout();
+			- global Object
+				- like console.log()
+				- setTimeout()
+				- clearTimeout()
+				- setInterval()
+				- clearInterval()
+			- all of these are declared globally in document
+			- but we cannot declare variables using that global scopes.
+
+			- Creating a Module
+				- logger.js file
+					- var url = "http://mylogger.io/log";
+					//we also need a function
+					- function log(message){
+						//send an HTTP request
+						console.log(message)
+					}
+
+					//for making it public to be available for other, we can use the export
+					- module.exports.log = log;
+
+					//similarly, if we want to exprot the url, we can simply do the following:
+					- module.exports.endPoint = url;
+					//we can export one or more members based on the requirements.
+
+					- example: CD player and buttons it is having outside.
+						- we are not interested in what is implemented inside the cd player
+						- we just use buttons to perform the specific task.
+					
+					- now exporting this module in app.js file
+						//best practise is to use const when ever importing any module, instead of let or var.
+						- const logger = require('./')
+						- logger.log('message');
+
+					//in node, we can export a single function or object as well like
+						- module.exports = log; // we cannot write it as exports = log because we cannot change the 
+					//and inside the app.js, we can simply write it as:
+						- logger('message') //instead of logger.log('message');
+			- Module Wrapper Function
+					- now i know that variables and functions are scoped within that module and are not visible outside that module.
+
+					- node does not execute the code directly.
+						- during runtime, our code is always wrapped inside the IIF (immediately invoked function)
+						- (function (exports, require, module, __filename, __dirname)){
+						}
+					- this is called as module wrapper function.
+				- node by default comes with the tons of built-in methods.
+		- build-in modules
+			- OS
+				- methods available
+						- const os = reuquire('os');
+						os.totalmem()
+						os.freemem();
+
+						- //or we can simply assign it to any variable like
+							- var totalmem = os.totalmem()
+							- and same for the freemem as well.
+			- fs
+				- this is how to work with the files.
+				- const fs = require('fs');
+				const { loadavg } = require('os')
+				const { EventEmitter } = require('stream')
+
+				- //remember to use asynchronous methods.
+				- method to view all the files available in a specific directory.
+				- fs.readdirsync('./');
+
+				- //now for asynchronous form of this method:
+					- path as first argument
+					- callback function with 2 parameters(err, files) as a second argument
+						- only one of the parameters will return the files otherwise it will give an error.
+					- fs.readdir('./', function(err, files){
+						if(err){
+							console.log("error", err);
+						}else{
+							console.log("result", files);
+						}
+					});
+			- events
+				- one of the core concepts of node is events
+				- it gives a signal that something has happened in our application.
+					- example
+						- we have a class called http that we can use to build a web Server.
+						- everytime we receives a request on that prot, that http class raises and event.
+							- means reading that request and returnig the right response.
+						- in documentation, several classes of node returns different types of events.
+				- one of the core building block of node and  that is Class:EventEmitter
+					- loading the requries module
+					- remember: whenever we call the required function we use the EventEmitter. like
+						- console EventEmitter = require('events');
+						- note that it starts from the uppercase, means that it's  class and not a function or an object.
+					- in this EventEmitter class we are having some built-in functions.
+					- so it is a container that contains a bunch of different methods.
+
+					- so first we need to make the instance of this class
+						- const objEventEmitter = new EventEmitter()
+					- second, we need to register that event
+						- objEventEmitter.on("messageLogged", function(){
+							console.log("listner called");
+						})
+					- third, we have to raise an event.
+						- objEventEmitter.emit(messageLogged);
+					- and when we call this emit method, it iterates over all the registered listners and calls them synchronously.
+					- often we have bunch of methods but we use to use only 2 of them most of the time
+						- one id emit() to raise an event
+							- //making a noise produce - singnailling.
+							- objEventEmitter.emit('messageLogged')
+								- if we simply run this line, nothing will happen.
+								- because nowhere in our has registered an eventlistener that is interested in that event.
+
+								- so for that an eventlistener is being created.
+									- it is a function that is generated when an event is raise.
+								- //how to register a listner.
+								- objEventEmitter.on("messageLogged", function(){
+									console.log("listner called");
+								})
+				- Event arguments
+					- when ever we raise an event we also want to send some data as well about that event.
+					- we can add aditional arguments as well which are referd to as event arguments.
+						- such as
+							- objEventEmitter.emti('messageLogged', {id: 1, url: 'http://'})
+								- this object is known as event argument. 
+							- now pass this object as a second parameter of the registered listner.
+							- //output: listner called {id: 1, url: "http://"}
+								- om this way, we can pass data about the event that just happened.
+				- Extending objEventEmitter
+					- we can extend the EventEmitter with any class as well.
+						- and it will simply inherit all the methods of that EventEmitter.
+					- Noe here's the steps how implement events
+						- create a class that extends the EventEmitter
+							- it will have additional methods as well
+						- and then inside the import file.
+							- instead of creating the insatnce of EventEmitter we will use the instance of the class created that has extended the EventEmitter, for additional functionality.
+			- http
+				// importing
+				- const http = require('http');
+				const server = http.createServer();
+				server.listen(3000);
+
+				server.on('connection', ()=> {
+					console.log("new connection...")
+				})
+				console.log("listening on port 3000...");
+
+				- but we will not be using this http module for building a back-end service or a web server because in this way we have to implement at the routes in a linear way.
+					- and so for that we will be using the express.js, that gives us a clean structure to handle various routes.
+			- custom modules
