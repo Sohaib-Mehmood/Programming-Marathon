@@ -1,0 +1,51 @@
+Design Patterns:
+	- Strategy Pattern
+		- the most simplest one
+			- that says using composition rather than inheritance
+		- example
+			- duck class
+				- quach()
+				- display()
+
+	- Observer Pattern
+		- one object for some reason needs to know when ever other object changes its state.
+			- example
+				- a reader wants to know when a new article has been published
+			- it's about push vs poll
+			- means moving towards the poll architecture to the push architecture.
+
+			- we are polling for the changes
+				- have you changed?? then update the values.
+			- push will be resposbile to tell that something has been changed.
+				- that i have changed
+				- but for that push guy needs to know about the poll guy.
+					- but for that we need to register the IObservers.
+				- 1 to many relationship
+					- one is something that is observed.
+						- and others are observers.
+				- ultimately
+					- if state of one thing changes, the others will be notified accordingly.
+
+
+			- observable (ISubject / IObservable)
+			 	- methods available
+			 		- add(IObserver) / register (IObserver)
+			 		- remove()
+			 		- notify
+			- observer (IObserver)
+			 	- update()
+			- means IObservable has 0 to many IObservers.
+		- concreteObservable implement interface "IObservable"
+			- same signature
+				- add(IObserver) / register (IObserver)
+			 	- remove()
+			 	- notify
+
+			 	- getState()
+			 	- setState() -> it is just a placeholder.
+		- and concreateObserver implements interface "IObserver"
+			- same signature
+				- update()
+
+	- Decorator Pattern
+		- 
