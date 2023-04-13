@@ -15,6 +15,66 @@ HTTP methods
 		- it is used to send data to a server to create/update a resource
 	- DELETE
 		- it deletes the specified resource.
+
+Routing
+	- routing refers to how an application's endpoint (url) respond to client requests.
+	- routing in express
+		- app.get() to handle GET requests
+		- app.post() to handle POST requests
+
+		- another method is to use the express.router as well.
+middleware
+	- are the functions that have access to the req, res and the next middleware function.
+	- it is commonly denoted by the named "next"
+	- if the current middleware does end the req-res cycle. it must call next() to pass control to the next middleware function.
+
+	types
+		- application-level middleware
+			- a function is executed each time the app receives a request
+			- app.use() or app.method()
+		- router-level middleware
+			- it is same as the alm, but it is bound to the instance of the react.router()
+			- router.use() or router.get()
+		- error-handling middleware
+			- have the 4th parameter as well
+				- app.use(err, req, res, next)
+				- res.send(500).send("something broke');
+		- built-in middleware
+			- express.static
+				- serves static assets such as html files, images, and so on.
+			- express.json
+				- parses incoming requests with json payload
+			- express.urlencoded
+				- parses incoming requests with url-encoded payloads.
+		- third-party middleware
+			- these are to add the functionality to the express app
+				- like cookieParser
+	- custome middlewares
+		- an example of the myLogger function
+			- that simply prints the log message
+				- const myLogger = function (req, res, next){
+					console.log("logged");
+					next();
+				}
+		- another example is that
+			- we can validate the cookies with the external async service.
+				- externalValidateCookies(cookies.testCookie)
+
+		- example:	check if user is logged-in or not.
+			- if user is loggedin then show "about me" page.
+
+- request validator using express validator
+	- it is a set of express.js middlewares that wraps the
+		- validator.js
+		- sanitizer functions
+
+- request processing pipeline
+	- it is the mechanism by which requests are processed beginning with a request and ending with a response.
+	- when we send a request from the browser, it goes to the middleware pipeline.
+		- if there is some code in the first middleware and there is some callback to the next middleware, then it will go to the next middleware.
+
+	- middleware order is important.
+
 Node.js
 	- a runtime environment for executing js code outside of the browser.
 	- ideal for building highly scalable, data-intensive and real-time apps
@@ -201,6 +261,11 @@ Node.js
 							- it will have additional methods as well
 						- and then inside the import file.
 							- instead of creating the insatnce of EventEmitter we will use the instance of the class created that has extended the EventEmitter, for additional functionality.
+				- example
+					- we can tighten different modules together without tightly coupling them.
+					- we can create an eventlistener that shows the current pizza order details.
+						- by extending the eventemiter class
+							- this.emit("order", size, topping);
 			- http
 				// importing
 				- const http = require('http');
@@ -215,3 +280,100 @@ Node.js
 				- but we will not be using this http module for building a back-end service or a web server because in this way we have to implement at the routes in a linear way.
 					- and so for that we will be using the express.js, that gives us a clean structure to handle various routes.
 			- custom modules
+
+
+---------------------------------------------------------------------
+
+package.json file
+
+dev dependencies vs other dependencies
+    - just for the 
+
+event loop
+    - setImmediate()
+        - 
+
+cross-origin-request-sharing
+
+
+use the import and export instead of require.
+
+//we cannot use async waits on functions that expects callbacks.
+
+
+//we have to make the wrapper function over this
+const sayHello = (callback) => {
+    console.log('hello');
+    const random = Math.random();
+    if(random < 0.5){
+        callback(new Error("unable to perform task"));
+    }else{
+        callback(undefined, "hello")
+    }
+}
+
+//we cannot do this:
+    - const result = 
+
+sayHello((err, data) => {
+    if(error){
+        console.log("error", error);
+    }else{
+        console.log('Data', data)
+    }
+});
+
+
+sayHello(callback);
+sayHello(callback);
+sayHello(callback);
+sayHello(callback);
+sayHello(callback);
+
+
+
+
+we have to use the try catch when we have a rejected condition.
+
+//timeout will run at the end
+setTimeout(() => {
+    console.log("set time out...");
+  }, 0);
+  
+  setImmediate(() => {
+    console.log("set immediate...");
+  });
+  
+  //synchrounous code will run first
+  console.log("settiemout vs setimmediate");
+  
+  //this will run first from the timmers.
+  process.nextTick(() => {
+    console.log("next tick...");
+  });
+  
+  
+  const fs = require('fs');
+  
+  function someAsyncOperation(callback) {
+    // Assume this takes 95ms to complete
+    fs.readFile('/path/to/file', callback);
+  }
+  
+  const timeoutScheduled = Date.now();
+  
+  setTimeout(() => {
+    const delay = Date.now() - timeoutScheduled;
+  
+    console.log(`${delay}ms have passed since I was scheduled`);
+  }, 100);
+  
+  // do someAsyncOperation which takes 95 ms to complete
+  someAsyncOperation(() => {
+    const startCallback = Date.now();
+  
+    // do something that will take 10ms...
+    while (Date.now() - startCallback < 10) {
+      // do nothing
+    }
+  });
