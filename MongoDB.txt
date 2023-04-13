@@ -1,0 +1,138 @@
+MongoDb:
+    - it is the document based database system that provides flexible schema designs.
+    - it is not a schema based database, it's a flexible schema database.
+    - it saves document in json like - bson
+    - we have collection of multiple documents.
+
+    - one column = field
+    - one row = single document
+
+    - indexes still behave the same in both,
+        - b-tree
+    - acid property is still same in both of them
+
+- the very first thing that we need to do is
+    - to include the mongoose in our project and open a connection to the test database on our locally running instance of mongoDB.
+    - const mongoose = require('mongoose');
+    - and then await mongoose.connect('mongodb://127.0.0.2:27017/test'); in the try catch box.
+
+- first we have to define the schema type
+    - then we can add any document to it.
+
+- instances of schemas/models are documents
+    - and they come up with their own built-in instance methods.
+        - find()
+        - save()
+    - and we can also define our own custom instance methods as well.
+
+connection:
+    - You can connect to MongoDB with the mongoose.connect() method.
+        - mongoose.connect('mongodb://127.0.0.1:27017/myapp');
+    - This is the minimum needed to connect the myapp database running locally on the default port (27017). If connecting fails on your machine, try using 127.0.0.1 instead of localhost.
+
+    - You can also specify several more parameters in the uri:
+        - mongoose.connect('mongodb://username:password@host:port/database?options...');
+
+    - Connection Events
+        - Connections inherit from Node.js' EventEmitter class, and emit events when something happens to the connection, like losing connectivity to the MongoDB server.
+            - When you're connecting to a single MongoDB server (a "standalone"), Mongoose will emit 'disconnected' if it gets disconnected from the standalone server, and 'connected' if it successfully connects to the standalone. 
+
+schema
+    - A schema is a JSON object that defines the structure and contents of your data.
+    - No, the concept of schema type in MongoDB is not the same as data types in MySQL.
+    - In MySQL, data types refer to the specific types of values that can be stored in a column of a table, such as integer, varchar, date, etc. These data types are used to define the structure of the table and ensure that the data stored in each column is of the appropriate type.
+    - In MongoDB, schema types are used to define the structure of the data stored in a document. A document is a JSON-like data structure that can contain fields with values of different types. Schema types in MongoDB include string, number, boolean, date, array, object, and more. These schema types are used to ensure that the data stored in a document conforms to a certain structure, but they are not as strict as data types in MySQL.
+    - So while both MySQL and MongoDB use types to define the structure of their data, the way they use them and the level of strictness they impose are different.
+
+Relations
+    - one-to-one and one-to-many
+    - References
+        - using literal in the queries.
+        - we use to use the Reference of that particular thing, in our main table.
+            - advantages
+                - less or no redundent data at all.
+            - disadvantages
+                - we need to query multiple collections to get the desired output.
+        - {
+            "name": "john",
+            "age": 28,
+            "from": ["london", "uk"}],
+            "purchaes": [1234, 1235]
+        }
+
+        {"__id": 1234, "name": "iphone 12", "price": 1299},
+        {"__id": 1235, "name": "LG TV", "price": 1299},
+        {"__id": 3456, "name": "samsung galaxy", "price": 1399},
+    - Embedded Documents
+        - we have to hardcore the things
+            - advantages
+                - you do not have to query multiple documents to get the desired output
+            - disadvantages
+                - this can lead to redundent or duplicate data in the collection.
+        - {
+            "name": "john",
+            "age": 28,
+            "from": ["london", "uk"}],
+            "purchaes": [
+                {"__id": 1234, "name": "iphone 12", "price": 1299},
+                {"__id": 1235, "name": "LG TV", "price": 1299}
+            ]
+        },
+        {
+            "name": "mark",
+            "age": 34,
+            "from": ["berlin", "germany"}],
+            "purchaes": [
+                {"__id": 1234, "name": "iphone 12", "price": 1299},
+                {"__id": 1235, "name": "LG TV", "price": 1299}
+            ]
+        }
+
+Transaction
+    - it is a set of operations used to perform a logical unit of work.
+        - a Transaction generally represent change in database.
+
+- Schema
+    - it is very important
+    - a mongoose schema defines the structure of the document,
+    default values, validators etc
+        - key: value pair
+            - like what value should be attached with the respective pair.
+            - like: name should be string.
+                - 
+            - like: boolean should be of true and false value only.
+    - const playlistSchema = mongoose.Schema({
+        name: {
+            type: String,
+            //require: true,
+            require: [true, "user name is required"]
+            unique: true
+        },
+        cType: String,
+        videos: Number,
+        active: Boolean,
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    })
+    - this is an example of a schema.
+
+Model
+    - it's a class
+    - a Mongoose model is a wrapper on the mongoose schema. A mongoose model provides an interface to the database for creating, querying, updating, deleting records, etc
+
+    - for example
+        - we have to have a colleciton of playlist.
+            //collection creation
+        - const Playlist = new mongoose.model("Playlsit", playlistSchema)
+
+    - and meanwhile we can perform multiple queries on that model
+        - like
+            - deleting
+            - updating etc.
+middleware
+    - 
+Aggregation Pipeline:
+    - pipeline means the possibility to execute an operation on some input and use the output as input for the next command and so on.
+    - mongodb supports the pipelinig concept in Aggregation framwork. There is a set of possible stages and 
