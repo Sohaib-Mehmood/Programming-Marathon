@@ -47,7 +47,7 @@ stashing
 
 git pull/push
 git origin/remote
-git stages/unstages/tracked/untracked
+git staged/unstaged/tracked/untracked
 git reset
 git fetch
 git cherry pick
