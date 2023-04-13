@@ -1,0 +1,57 @@
+Rebasing and Merging
+    - two ways to solve the same problem
+
+    - there are 2 ways of integrating changes from one branch to second branch
+
+Merging
+    - merging of all types are "forward focused"
+    - git switch master
+        - first go to the previous branch.
+    - get merge "bugfix" / branch_name
+        - and then merge the branches
+    - example
+        - simplest example is the fast forward branch
+            - a straight line it is.
+
+    - but not all branches are fast forward.
+        - in that case, we use Rebasing
+            - when we have too much merge commits and just have a mess of changes everywhere.
+                - when we want to rebase all the work of 1st branch on to the 2nd branch
+                - means that 1st branch is now on the tip of the 2nd branch.
+            - git switch feature
+            - git rebase master
+
+
+original
+    - rebase
+        - nice and linear, and we are re-writing the history.
+        - we will end up with 3 brand new commits based on the commits in the feature branch
+        - why?
+            - much cleaner history
+                - never rebase commits that other people already did.
+                - donot rebase shared work.
+    - merge
+        - no so linear but we are not re-writing history.
+        - we will end up with a single commit and that is the merge commit
+
+stashing
+    - intermediate git skills
+    - example
+        - i am working on a specific branch and have done some changes
+            - and i am not ready to commit those changes
+        - -u flag is for the untracker files or folder
+
+        - The git stash apply command leaves the topmost stash on the stash list so that we can later use it, on the other hand, the git stash pop command removes or throw away the latest or the topmost stash.
+            - with git stash apply, we can specify the stash number as well.
+        - git stash clear to remove all the stash things.
+
+git pull/push
+git origin/remote
+git stages/unstages/tracked/untracked
+git reset
+git fetch
+git cherry pick
+git force push
+PAT token
+branc rules
+git fork
