@@ -44,3 +44,165 @@ stashing
         - The git stash apply command leaves the topmost stash on the stash list so that we can later use it, on the other hand, the git stash pop command removes or throw away the latest or the topmost stash.
             - with git stash apply, we can specify the stash number as well.
         - git stash clear to remove all the stash things.
+
+git pull vs push
+    - git pull and git push are two important commands in Git, a version control system used for managing source code and collaborating with others. Here is the difference between the two:
+
+    - git pull: This command is used to fetch the changes from a remote repository and merge them into the local repository. It is essentially a combination of two commands: git fetch and git merge. When you run git pull, Git will download the latest changes from the remote repository and merge them into your local branch.
+
+    - git push: This command is used to upload the local changes to a remote repository. After you have made changes to your local branch and committed them, you can use git push to send those changes to the remote repository. Other users who have access to the same remote repository can then fetch your changes and merge them into their own local branches.
+
+    - In summary, git pull is used to fetch and merge changes from a remote repository into your local branch, while git push is used to upload your local changes to a remote repository for others to access.
+
+
+
+git origin / remote
+    - In Git, "origin" is the default name given to the remote repository that a local repository was cloned from. The remote repository is the copy of the repository that is hosted on a remote server, such as GitHub, GitLab, or Bitbucket.
+
+    - When you clone a repository from a remote server, Git automatically sets up a connection between your local repository and the remote repository. This connection is called a "remote," and it is identified by a name. The default name for the remote is "origin."
+
+    - You can see the list of all the remotes associated with your local repository using the command git remote -v. This command will display the names and URLs of all the remotes associated with your repository.
+
+    - You can use the remote to fetch changes from the remote repository using git fetch origin and push your changes to the remote repository using git push origin. You can also specify a different remote name if you want to fetch from or push to a different remote.
+
+
+
+git stages / unstages
+    - In Git, files go through several stages as you work on them. Understanding these stages is crucial to working effectively with Git.
+
+    The three primary stages in Git are:
+
+    - Untracked: When you create a new file in your local repository, it is untracked by Git. This means that Git is not aware of the file's existence.
+
+    - Staged: After you have made changes to a file, you can stage those changes to be committed to the repository. Staging a file means that you are telling Git to include the changes in the next commit.
+
+    - Committed: Once you have staged your changes, you can commit them to the repository. A commit is a snapshot of the current state of the repository that includes all the changes you have staged.
+
+    - To stage changes in Git, you can use the command git add <filename>. This command adds the specified file to the staging area. You can also use git add . to stage all changes in the current directory.
+
+    - To unstage changes, you can use the command git reset <filename>. This command removes the specified file from the staging area. If you want to unstage all changes, you can use git reset.
+
+    - It's important to note that unstaging changes does not delete or discard them. It simply moves the changes back to the untracked state, so you can stage and commit them again later if needed.
+
+
+
+git reset
+    - git reset is a powerful Git command that allows you to undo changes in your local repository. This command can be used to move the current branch to a specific commit or to unstage changes that have been added to the staging area.
+
+    Here are the three primary forms of the git reset command:
+
+    - Soft reset: git reset --soft <commit> moves the current branch to the specified commit but leaves the changes in the staging area. This means that the changes are not lost, and you can commit them again with a new commit message.
+
+    - Mixed reset: git reset --mixed <commit> moves the current branch to the specified commit and removes the changes from the staging area. This means that the changes are still present in your working directory, but they are not staged for the next commit.
+
+    - Hard reset: git reset --hard <commit> moves the current branch to the specified commit and removes all changes in the staging area and working directory. This means that any changes that have not been committed will be permanently lost.
+
+    - It's important to note that the git reset command can be dangerous, especially when used with the --hard option, as it permanently discards changes. It's always a good idea to make a backup of your changes before using this command. Additionally, be careful when using the git reset command on shared branches, as it can cause conflicts with other team members.
+
+
+git fetch
+    - git fetch is a Git command that is used to download changes from a remote repository to your local repository without merging them. This command is useful when you want to see what changes have been made in the remote repository, but you're not yet ready to merge those changes into your local branch.
+
+    - When you run git fetch, Git downloads the latest changes from the remote repository and stores them in your local repository. However, these changes are not automatically merged with your local branch. Instead, they are stored in a separate branch called "origin/master" (assuming "origin" is the name of the remote and "master" is the name of the branch you are fetching from).
+
+    - After running git fetch, you can review the changes that were downloaded by using git diff origin/master. This command will show you the difference between your local branch and the "origin/master" branch.
+
+    - If you decide that you want to merge the changes into your local branch, you can use the git merge command. For example, you can run git merge origin/master to merge the changes from the "origin/master" branch into your local branch.
+
+    - Overall, git fetch is a useful command for staying up to date with changes in a remote repository without automatically merging those changes into your local branch. It allows you to review the changes and decide when to merge them into your local branch.
+
+
+git cherry pick
+    - git cherry-pick is a Git command that allows you to apply a single commit from one branch to another. This command is useful when you want to apply a specific change from one branch to another without merging the entire branch.
+
+    Here's how to use git cherry-pick:
+
+    - Identify the commit that you want to apply to another branch. You can do this by running git log or by viewing the commit history in a Git GUI.
+
+    - Switch to the branch where you want to apply the commit. You can use the git checkout command to switch branches.
+
+    - Run the git cherry-pick command followed by the commit hash of the commit you want to apply. For example, git cherry-pick abc123.
+
+    - If there are any merge conflicts, resolve them manually and commit the changes.
+
+    - After running git cherry-pick, the changes from the specified commit will be applied to the current branch. This can be useful when you want to apply a specific bug fix or feature from one branch to another without merging the entire branch.
+
+    - It's important to note that git cherry-pick creates a new commit in the target branch, so the commit history will be different from the source branch. Additionally, if the changes in the target branch conflict with the changes in the cherry-picked commit, you may need to resolve those conflicts manually.
+
+
+git force push
+    - git force push is a Git command that allows you to overwrite the remote branch with the contents of your local branch. This can be useful when you want to discard changes in the remote branch and replace them with the contents of your local branch.
+
+    Here's how to use git force push:
+
+    - Make sure that you have the latest changes from the remote branch by running git pull.
+
+    - Make changes to your local branch.
+
+    - Run git push --force to push your local branch to the remote repository and overwrite the remote branch. Alternatively, you can use the shorthand command git push -f.
+
+    - It's important to note that git force push can be dangerous and should be used with caution. This command overwrites the remote branch and permanently discards any changes that were previously in the remote branch. This can cause conflicts with other team members who have made changes to the remote branch, so it's important to communicate with your team before using this command.
+
+    - In general, it's best to avoid using git force push and instead use git pull and git merge or git rebase to merge changes from the remote branch with your local branch. However, there may be situations where git force push is necessary, such as when you accidentally push sensitive information to a remote branch and need to remove it quickly.
+
+
+git fork
+    - In Git, a "fork" is a copy of a repository that is hosted on a different account. Forking allows you to make changes to a repository without affecting the original repository. You can use forks to experiment with changes, contribute to open-source projects, or create your own versions of existing projects.
+
+    Here's how to fork a Git repository:
+
+    - Navigate to the repository that you want to fork on GitHub or another Git hosting service.
+
+    - Click the "Fork" button in the top right corner of the page.
+
+    - Choose the account where you want to host the forked repository.
+
+    - Wait for the forking process to complete. This may take a few moments, depending on the size of the repository.
+
+    - Once the fork is complete, you will have a copy of the original repository on your account.
+
+    - You can now clone the forked repository to your local machine and make changes to it just like you would with any other repository. When you're ready to contribute your changes back to the original repository, you can create a pull request or submit your changes to the repository owner for review.
+
+    - Forking is a powerful feature of Git that allows you to experiment with changes and collaborate with others on projects. However, it's important to respect the original repository and follow any guidelines or rules set by the repository owner.
+
+
+
+branch rules in git
+    - In Git, branches are used to isolate changes and work on multiple features or fixes simultaneously. When working with branches, there are some best practices and guidelines that can help you keep your code organized and minimize conflicts. Here are some branch rules in Git:
+
+    - Keep your branch names descriptive: Choose a descriptive name for your branch that indicates what changes it contains. This makes it easier to understand the purpose of the branch and to identify it in a list of branches.
+
+    - Create a new branch for each feature or bug fix: Instead of making changes directly to the main branch, create a new branch for each feature or bug fix. This makes it easier to keep track of changes and to isolate conflicts.
+
+    - Keep your branches up to date: Regularly merge changes from the main branch into your feature branches to keep them up to date. This helps prevent conflicts and ensures that your changes are compatible with the latest version of the code.
+
+    - Avoid long-running branches: Try to avoid keeping branches open for long periods of time. Instead, merge your changes into the main branch as soon as they are ready. This helps prevent conflicts and makes it easier to manage your changes.
+
+    - Use pull requests for code review: When you're ready to merge your changes into the main branch, create a pull request and ask a team member to review your code. This helps ensure that your changes are high quality and that they meet the project's requirements.
+
+    - By following these branch rules in Git, you can keep your code organized, minimize conflicts, and make it easier to collaborate with other developers.
+
+
+PAT token in git.
+    - A Personal Access Token (PAT) is a type of authentication token that can be used with Git to access remote repositories. It is a secure way to authenticate with Git without having to use your username and password.
+
+    Here's how to create a PAT for Git:
+
+    - Log in to your Git hosting service and navigate to the settings page for your account.
+
+    - Find the section for Personal Access Tokens and click the "Generate New Token" button.
+
+    - Choose the scopes or permissions that you want to grant to the token. For example, you might grant read-only access to your public repositories or full access to your private repositories.
+
+    - Click the "Generate Token" button to create the PAT.
+
+    - Copy the PAT to your clipboard or save it in a secure location.
+
+    - To use the PAT with Git, you can simply replace your password with the PAT when prompted for authentication. For example, if you're cloning a repository from GitHub, you might use a command like this:
+
+    bash
+    Copy code
+    git clone https://github.com/username/repository.git
+    Username: your_username
+    Password: your_pat
+    By using a PAT instead of your password, you can reduce the risk of your credentials being compromised or stolen. You can also revoke or regenerate your PAT at any time to further enhance your security.

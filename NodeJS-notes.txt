@@ -8,9 +8,11 @@ HTTP methods
 		- values are visible inside the url above
 		- upto 2048 characters
 		- data is visible to everyone in the url
+		- The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
 	- POST
 		- no characters limit
 		- data is not displayed in the URL.
+		- The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
 	- PUT
 		- it is used to send data to a server to create/update a resource
 	- DELETE
