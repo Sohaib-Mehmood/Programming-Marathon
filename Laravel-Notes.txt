@@ -1,0 +1,53 @@
+- How page is being Displayed:
+	- a request comes in -> then in the routes folder it correspondes the necessary controller to that URL.
+	- Controller then provides all the necessary information that provides us the response view.
+	- View then receives the data from the controller and generates the html structure for the user
+
+
+- Laravel is composed of packages
+
+Steps to Create and Install new Laravell app.
+1. composer create-project laravel/laravel [project_name]
+2. php artisan serve
+
+How the laravel app runs
+1. inside the routes folder -> web.php
+	- We can create as many routes as we want to.
+	- means when ever a app is being created, a route will be generated and it tells to load the '/' path, and display the respective view from that function.
+	- view is something that can be seen from the eyes, and therefore, it will be translated to HTML
+	- if that view is not been written inside that routes folder, then NOT FOUND meesage will be shown on the screen.
+	- but we can change the path for that, ie. instead of '/', if I write '/homee' then, it will be at that url, respectively.
+- Routes are in the routes directory
+- Views are in the Resouces -> views directory.
+- Public folder -> custom CSS and JS files.
+
+
+- meanwhile, laravel is intelligent enough to translate any thing into the html page.
+	- either it's a string
+	- it's a JSON format.
+		- example;
+			- return ['foo' => 'bar'];
+	- or we can can give it any name of the view we want to display
+		- example
+			- return view('welcome');
+- wildcards
+	- are simply the regular expressions, that allow the url for the defined url's only, otehrwise it will give the "404 not found" error.
+	- right after the route declaration, using where(.
+	
+- slugs
+	- for making the routes dynamci we can use the slugs.
+	
+- Caching
+	- caching allow us to effectively avoid some expensive operations.
+	- like each time when a page is being requesed, than instead of loading it from the server each time, we can simply cache it. ie; storing it in the memory
+		- $post = cache()->remember("posts.{$slug}", 5, function () use ($path){
+			return file_get_contents($path);
+		});
+		- $post = cache()->remember("posts.{$slug}", now()->addminutes(50)/addhours(2), function () use ($path){
+			return file_get_contents($path);
+		});
+		
+- File System
+	- What file system does is that it simply finds the requried path, cache it and display it.
+	- creating a new file in 'Models' folder'
+	- drawback is that, we have to call those files again and agian.
