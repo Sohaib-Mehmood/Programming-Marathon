@@ -1,0 +1,181 @@
+Anatomy of CSS
+	- h1{color: red}
+	- selector {property: value;}
+		- selector = who?
+		- property = what?
+		- value = how?
+CSS Selectors:
+	- Tag
+		- these are the names of the html tags
+	- Id
+		- id should be unique in the complete project
+	- Class
+		- multiple tags can have multiple class selectors
+	- Universal
+	- Combined Selector
+	
+	
+Seudo classes
+	- html can have different states
+	- have the semi-colon in front of it.
+	
+div
+	- content division element
+	- div won't do anything unless we apply CSS to it
+
+box model:
+	- it comprises of the following things:
+		- background-color
+		- background-image
+		- margin
+		- border
+		- padding
+
+- Display property
+	- it has four different values
+		- block
+			- takes the whole width and block the rest of the elements on that line.
+			- we can change the width of block elements
+			- even it takes the 100% of the width, the heigth is still determined by the content it contains.
+				- p tag
+				- h tag
+
+		- in-line
+			- they donot block other elements
+			- but we cannot chagne the width of the inline elements
+				- spans
+				- image
+				- anchors
+				
+		- in-line block
+			- this is the best of aboue two
+			- because we can change the width as well as we can display them as they are the inline elements.
+				- display: inline
+		- none
+			- it will simply takes the tag out of the flow and makes it disappears
+			- two conditions
+				- display: none
+					- will make the tag disappears and take it out of the flow
+				- visibility: hidder
+					- it will disapper the tag but it's place will still be there.
+			- we have to choose what property we want to apply out of these two.
+
+- CSS Positioning
+	- points to keep in mind while positioning
+		1. content is everything
+		2. order comes from code, i.e order matters
+		3. children always sit on top of its parent
+			- div
+				h1 #h1 is the child of div
+			  div
+
+	- Positioning
+		- static
+			- all elements are static by default
+			- it means it will keep on going as per the flow of the html
+		- relative
+			- it wont affect the position or flow of any other element
+			- the element will move from it's actual place where it is supposed to be.
+			- to achieve this position we have to use the following coordinates properties
+				- top
+				- right
+				- botton
+				- left
+		- absolute
+			- it does affect the flow of the html, only for those who are cominmg after this absolutely positioned tag element.
+			- cool thing is that it become relative to it's parent which is the complete body
+			- but if the parent is someone else let say the immediate parent, then it has to have a relatvie parent
+				- for example:
+					positoin: absolute
+					right: 20px
+				- it will make it align to 20px from the right side.
+			- and for that the parent position = relative
+			- child position = absolute
+		- fixed
+			- it is relative to the viewport, which means it always stays in the same place even if the page is scrolled.
+		- sticky
+			- it behaves as a regular untill it reaches the defined offset and then becomes fixed.
+- the dark art of centering element
+	- text-align: center --> should be used in the parent tag
+		- it will simply center all the elements
+	- if we have given the block level element h1 a width of let say 10%.
+	- so to achieve this we have to set the following
+		- margin: 0 auto 0 auto; #0 auto
+		
+- Specificity Hierarchy
+	- Every CSS selector has its place in the specificity hierarchy.
+	- There are four categories which define the specificity level of a selector:
+		1. Inline styles - Example: <h1 style="color: pink;">
+		2. IDs - Example: #navbar
+		3. Classes, pseudo-classes, attribute selectors - Example: .test, :hover, [href]
+		4. Elements and pseudo-elements - Example: h1, ::before
+
+Static VS Dynamic CSS units
+Static
+	- static sizes donot change with the screen sizes
+	- while dyanmic sizes do change up
+	- px vs % vs em vs rem
+	- Px
+		- it measures any design according to screen pixels.
+		- drawback =  it does not give responsive design in every devices if we donot use media queries.
+- Dynamic
+	- dynamic sizes do change up
+	- both em and rem are relative length units, are scalable, more flexible
+	- em
+		- relative to the font size of the parent element
+		- 2em means 2 times the size of the current font.
+	- rem
+		- relative to font-size of the root element, i.e; html element
+
+			
+16px = 1em = 100%	
+16px = 100px, it means for 90px => 90/16 = 562.2%;
+	
+	
+- clear vs float
+	- float is used to make the text wrap around the image
+	- clear is the anti float
+		
+	
+- media queries
+	- Now let’s see some common breakpoints for widths of devices:
+		320px — 480px: Mobile devices
+		481px — 768px: iPads, Tablets
+		769px — 1024px: Small screens, laptops
+		1025px — 1200px: Desktops, large screens
+		1201px and more —  Extra large screens, TV
+
+
+
+
+				Bootstrap (front-end Library)
+- for the responsiveness
+	- it means that it should response with respect to the view-port
+	- it comes with the pre-styled elements
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
