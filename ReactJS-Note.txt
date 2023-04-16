@@ -1,0 +1,296 @@
+ReactJS
+	- JavaScript library to build user interfaces.
+	- Surprisingle, we can make components and use them dynamically for whatever we want to make.
+	- React is composed of numerous independent, isolated and resuable components, and then sum up to build complex applications.
+
+	- we can break down a very complex structure into a component tree.
+	- every react application is a tree of components.
+		- having the root component.
+	- Example (all of these are components):
+		- App
+			- NavBar
+			- ToDoList
+				- ListItem
+					- CheckBox
+					- ItemText
+
+	- <MyHeader/>
+	- <PageContent/>
+	- <MyFooter/>
+
+	- each component has its own ( html, css and js ) files in the small chunks, we can have it as many as we want it to be.
+	- each time it refreshes the component, whenever it updates.
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+ReactDOM.render
+	- What to show and where to show it. (IMPORTANT)
+	- it is responsible for how the UI will look like
+		- Output of this render method is simple, plain JS object
+		- react keeps a light weight representation of the DOM, that is refered as DOM.
+		- whenever we change the state of a component we get a new react element
+		- react will then compare this element and its children with the previous one.
+		- its figures out what is being changed and then it will update the part of the real dom and keep everything in a sync. 
+	- all of this happens with the help of JSX.
+
+	- rendor method can only take one html element, cannot render multiple html tags.
+
+JSX
+	- in jsx we should be following the "camelCase" naming convention.
+	- for applying the css we have to use the javascript objects.
+		- example
+			- const = customeStyle = {
+				color: "red",
+				fontSize: "20px",
+				border: "1px solid black"
+			}
+			customeSytle.color = "blue";
+
+	- it is the core component of react
+	- JSx stands for JavaScript XML, that allow us the write the HTML code in react.
+		- React will internally convert this into a virtual DOM, and will ultimately output out HTML for us.
+
+	- ReactJs is a JS front-end Library, that uses the Virtual DOM.
+	- React application is made up of multiple components, each for outputting small, reusable piece of HTML
+
+Babel
+	- is a JS compiler, that converts it into the browser compatible JS
+
+Components
+	- converting large JS files into small manageable components is what this means.
+	- remember
+		- whenever we are exporting the single-export, we can have it with any name we want to.
+		- but if there are multiple export module from the single file then the name must be same with the original exports.
+			- i.e; (more preferable method of importing the modules)
+				- default export {doublePi, tripplePi};
+				- then in the main file, we have to import it in like:
+					- import PI, {doublePi, tripplePi} from "./math.js";
+		- or we can use the * as well to import everything from that component.
+			- import * as pi from "./math.js"
+			- {pi.doublePi};
+			- {pi.tripplePi};
+
+	every component is implemented as a javascript class
+	- and they are having a
+		- state method
+			- state is a component that we want to display when the data is being rendered.
+		- render method
+		- ReactDOM.render(element, location);
+			- responsible for what the UI should look like.
+			- output of this render method is a react element
+				- that is a simple JS object that maps to a DOM element.
+				- it's not a real DOM, rather a copy of DOM in the memory, known as Virtual DOM.
+					- that is the light-weight representation of the DOM in the memory, that is referred as virtual DOM.
+					- it is very cheap to create.
+
+				- when we change the state of the component we get a new react element.
+				- react will then compare it and it's children with the previous one
+				- then it figures out what is being changed and ultimately change that in real DOM.
+				- in this way it will keep the virtual dom in sync with real dom.
+
+Props
+	- In react, attributes are called as the "props".
+	- allow the users to pass data and arguments to the components
+		- they are very similar just like attributes are being given to the HTML tags.
+	- a parent component can pass aditional information to it's children using props
+		- and therefore children cannot make any changes to the props
+	- props are the read-only and cannot be changed
+
+	- We cannot apply css to the custom made components.
+
+Using Class Components:
+
+	class Classprops extends Component{
+		render(){
+			return (
+				<div>
+					<h1>
+						hello {this.prop.name} from lahore.
+					</h1>
+				</div>
+			);
+		}
+	}
+
+	class App extends React.Component{
+		render(){
+			return(
+				<div>
+					<ClassProps name = "learner 1x">
+				</div>
+			);
+		}
+	}
+
+	- this.props.children
+		- can be used when the browser doesn't know the input of the child ahead.
+
+using functional components:
+	
+	function FunctionProps(){
+		return (
+			<div>
+				<Classprops name="learner 1">
+			</div>
+		)
+	}
+
+	- rest of it same but we have to pass the props as a parameter to the function.
+
+
+State
+	- typically a state is an object that stores the values of the properties belonging to the component that could change over a period of time
+		- a state can be modified based on the user action or network changes
+		- every time the state of an object changes, React re-renders the component to the browser.
+
+		- the state object is initialized in the browser.
+		- the state object can store multiple properties
+
+		- this.setState() is used to change the value of the state object.
+
+		- setState() function performs a shallow merge between the new and previous states.
+
+		- state holds a data and can chage over time
+
+		- for that, we use a variable, let say let temp = 60;
+		- and the UI changes w.r.t the value of that temp.
+
+		- for example: (this is called as declarative programming)
+			- we want to strike through the word. when that item is done.
+			- for example
+				- function App(){
+					var isDone = true;
+					const strikeThrough = {textDecoration: "line-through"};
+
+					return <p style={isDone ? strikeThrough : mull}> Buy Milk < /p>;
+				}
+
+		- for example: (this is called as imperative programming)
+			- document.getElementById("root").style.textDecoration = "line-through";
+			- because all that is done by the side of javaScript, to do something different.
+
+
+React Router
+	- get rid of the page reloads
+	- means client side rendering (this is because it is so famous)
+
+React Hooks (important)
+	- built-in react functions, they allow us to use the features of the react library
+		- example
+			- life cycle methods
+			- states
+			- context
+
+	- it allows you to use state and other react features without writing a class.
+	- hooks are the functions which "hook into" react state and lifecycle features from fuctional components.
+
+	- important
+		- we cannot use react hooks in classes
+		- hooks should always be used at the top level of the react functions.
+
+UseState hook
+	- it is an array that returns 2 items
+		- 1. current data
+		- 2. updated data
+
+	- example: Increasing Counter
+		- const App = () => {
+			const state = useState();
+
+			const [count, setCount] = useState(0);
+			const IncNum = () => {
+				setCount(count + 1);
+			};
+
+			return (
+				<>
+					<h1> {count} < /h1>
+					<button onClick={IncNum}> Click Me < /button>
+				</>
+			)
+		}
+	- example: update time upon pressing the button.
+		- function App(){
+			const now = new Date().toLocateTimeString();
+			const [time, setTime] = useState(now);
+
+			function updateTime(){
+				const newTime = new Date().toLocateTimeString();
+				setTime(newtime);
+			}
+			
+			return (
+				<div className = "container">
+					<h1> {time} < /h1>
+					<button onClick = {updateTime}> Get Time </button>
+				</div>
+			);
+		}
+
+useEffect:
+	- useEffect(<function>, <dependency>)
+	- that let you synchronize
+
+Higher Order Functions:
+	- advanced technique in React for reusing Component logic.
+	- a HOC is a function that takes a component and returns a new component with the extended functionality.
+
+	- const EnhancedComponent = higherOrderComponent(WrapperComponent);
+
+	- transforms a component into another component.
+
+
+
+Map() function in javascript:
+	- 
+
+emojiPedia.maps(<Entry />)
+
+function Entry (emojiTerm){
+	retrun <Entry
+		key = {emojiPedia.id}
+		emoji = {emojiPedia.emoji}
+		name = {emojiPedia.name}
+		description = {emojiPedia.meaning}
+}
+
+Conditional rendering:
+	- it is used too much in the reactJS.
+	- example:
+		- let userIsRegistered = true;
+		- function App(){
+			return (
+				<div className = "conatiner">
+					<Form userIsRegistered={userIsRegistered} />
+				</div>
+			);
+		}
+		export default App;
+
+	- {props.userIsRegistered ? "login" : "Registrer"}
+
+Forms:
+	- function handleChange(event){
+		console.log(event.target.value);
+		setName(event.target.value);
+	}
+	- function handleClick(){
+		setHeading(name);
+	}
+	- <form onSubmit = {handleClick}>
+		<input
+			onChange = {handleChange}
+			type = "text"
+			placeHolder = "What's your name?
+			value = {name}
+		/>
+		<button type = "submit" > submit </button>
+	</form>
+
+Functional components vs Class Components:
+	- Class Component (Not Recommended)
+		- must extend the react.component
+		- not having the () after the name.
+		- class instead of function.
+		- 
