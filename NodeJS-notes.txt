@@ -1,8 +1,34 @@
+- constructor function in arrow functions.
+    - new keyword for creating instances.
+    - when classes was not there we use the new keyword.
+
+- practise the async wait and promises.
+- mdn link for "this" keyword.
+
+- make a class
+    - getName by vanilla function
+    - and one by arrow function.
+
+- useeffect will run after the next render.
+    - return will run on the unmount.
+
+Points to improve on ReactJS
+    - differences between primitive vs reference type
+    - technical differences between arrow and simple functions
+    - functions hoisting with var keyword
+    - where to use the IIF, and what are the benefits?
+    - "this" keyword with it's four type of binding.
+    - React functional vs class components
+    - React Life Cycle methods
+    - React all Hooks
+
+
 Rest Api
 	- it is an api that conforms to the constraints of the REST architecture style.
 		- that there should be the client-server communication
 		- statelessness
 		- uniform interface
+	- Beginners can assume a REST API means an HTTP service that can be called using standard web libraries and tools.
 HTTP methods
 	- GET
 		- values are visible inside the url above
@@ -20,15 +46,50 @@ HTTP methods
 
 Routing
 	- routing refers to how an application's endpoint (url) respond to client requests.
-	- routing in express
+	- routing is defined using methods of the Express app.
 		- app.get() to handle GET requests
 		- app.post() to handle POST requests
+		- app.all() for all http methods
+		- app.use() to specify middleware as the callback function.
+
+		The following code is an example of a very basic route.
+
+		const express = require('express')
+		const app = express()
+
+		// respond with "hello world" when a GET request is made to the homepage
+		app.get('/', (req, res) => {
+		res.send('hello world')
+		})
 
 		- another method is to use the express.router as well.
+		Route handlers
+			- You can provide multiple callback functions that behave like middleware to handle a request.
+
+		- app.route()
+			- you can create chainable route handlers for a route path by using app.route().
+				- app.route('/book')
+				.get((req, res) => {
+					res.send('Get a random book')
+				})
+				.post((req, res) => {
+					res.send('Add a book')
+				})
+				.put((req, res) => {
+					res.send('Update the book')
+				})
 middleware
+			- router.user();
 	- are the functions that have access to the req, res and the next middleware function.
 	- it is commonly denoted by the named "next"
 	- if the current middleware does end the req-res cycle. it must call next() to pass control to the next middleware function.
+	- Middleware functions can perform the following tasks:
+
+		Execute any code.
+		Make changes to the request and the response objects.
+		End the request-response cycle.
+		Call the next middleware in the stack.
+
 
 	types
 		- application-level middleware
@@ -67,8 +128,11 @@ middleware
 
 - request validator using express validator
 	- it is a set of express.js middlewares that wraps the
-		- validator.js
-		- sanitizer functions
+		- extensive collection of validators
+		- sanitizer functions offered by validator.js
+
+	- The goal of validate. js is to provide a cross framework and cross language way of validating data. The validation constraints can be declared in JSON and shared between clients and the server.
+	- It allows you to combine them in many ways so that you can validate and sanitize your express requests, and offers tools to determine if the request is valid or not, which data was matched according to your validators, and so on.
 
 - request processing pipeline
 	- it is the mechanism by which requests are processed beginning with a request and ending with a response.
@@ -76,6 +140,12 @@ middleware
 		- if there is some code in the first middleware and there is some callback to the next middleware, then it will go to the next middleware.
 
 	- middleware order is important.
+	- When a request is received by Express, each middleware that matches the request is run in the order it is initialized until there is a terminating action (like a response being sent).
+		- Incoming Request -> Middleware ->next() Middleware ->next()0 middleware ->next() response
+								|----------------------------------->res.send()
+													|--------------->res.send()
+
+	- So if an error occurs, all middleware that is meant to handle errors will be called in order until one of them does not call the next() function call.
 
 Node.js
 	- a runtime environment for executing js code outside of the browser.
@@ -116,6 +186,16 @@ Node.js
 	- do not use node for cpu-intensive apps
 		- it should only be used for the data-intensive apps
 
+	Phases Overview
+	- timers: this phase executes callbacks scheduled by setTimeout() and setInterval().
+	- pending callbacks: executes I/O callbacks deferred to the next loop iteration.
+	- idle, prepare: only used internally.
+	- poll: retrieve new I/O events; execute I/O related callbacks (almost all with the exception of close callbacks, the ones scheduled by timers, and setImmediate()); node will block here when appropriate.
+		- setImmediate() is designed to execute a script once the current poll phase completes.
+		- setTimeout() schedules a script to be run after a minimum threshold in ms has elapsed.
+	- check: setImmediate() callbacks are invoked here.
+	- close callbacks: some close callbacks, e.g. socket.on('close', ...).
+
 
 	- in node we are not having document or getelemtntbyid or something like that
 
@@ -138,6 +218,15 @@ Node.js
 				- clearInterval()
 			- all of these are declared globally in document
 			- but we cannot declare variables using that global scopes.
+
+			- module installed using
+				- npm install modulename
+
+			- then Node looks for the module using the following searches, in turn:
+				- /home/myname/myprojects/myapp/node_modules/mymodule.js
+				- /home/myname/myprojects/node_modules/mymodule.js
+				- /home/myname/node_modules/mymodule.js
+				- /node_modules/mymodule.js
 
 			- Creating a Module
 				- logger.js file
@@ -213,7 +302,7 @@ Node.js
 				- it gives a signal that something has happened in our application.
 					- example
 						- we have a class called http that we can use to build a web Server.
-						- everytime we receives a request on that prot, that http class raises and event.
+						- everytime we receives a request on that port, that http class raises an event.
 							- means reading that request and returnig the right response.
 						- in documentation, several classes of node returns different types of events.
 				- one of the core building block of node and  that is Class:EventEmitter
@@ -223,6 +312,10 @@ Node.js
 						- note that it starts from the uppercase, means that it's  class and not a function or an object.
 					- in this EventEmitter class we are having some built-in functions.
 					- so it is a container that contains a bunch of different methods.
+
+					- When a new listener is added, 'newListener' event is fired and when a listener is removed, 'removeListener' event is fired.
+
+					- EventEmitter provides multiple properties like on and emit. on property is used to bind a function with the event and emit is used to fire an event.
 
 					- so first we need to make the instance of this class
 						- const objEventEmitter = new EventEmitter()
@@ -258,7 +351,7 @@ Node.js
 				- Extending objEventEmitter
 					- we can extend the EventEmitter with any class as well.
 						- and it will simply inherit all the methods of that EventEmitter.
-					- Noe here's the steps how implement events
+					- Now here's the steps how implement events
 						- create a class that extends the EventEmitter
 							- it will have additional methods as well
 						- and then inside the import file.
@@ -283,6 +376,32 @@ Node.js
 					- and so for that we will be using the express.js, that gives us a clean structure to handle various routes.
 			- custom modules
 
+
+
+- Templating Engine
+	- A template engine enables you to use static template files in your application. At runtime, the template engine replaces variables in a template file with actual values, and transforms the template into an HTML file sent to the client. This approach makes it easier to design an HTML page.
+	- module internally, as shown below (for the above example).
+
+	- others are pug, mustache, and EJS
+
+app.set('view engine', 'pug')
+Create a Pug template file named index.pug in the views directory, with the following content:
+
+html
+  head
+    title= title
+  body
+    h1= message
+Then create a route to render the index.pug file. If the view engine property is not set, you must specify the extension of the view file. Otherwise, you can omit it.
+
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+
+- Job Queues using Bull
+	- Bull is a Node library that implements a fast and robust queue system based on redis.
+
+	- Although it is possible to implement queues directly using Redis commands, this library provides an API that takes care of all the low-level details and enriches Redis basic functionality so that more complex use-cases can be handled easily.
 
 ---------------------------------------------------------------------
 
@@ -379,3 +498,26 @@ setTimeout(() => {
       // do nothing
     }
   });
+
+- Jest vs SuperTest
+	- Purpose:
+		- Supertest: Supertest is a library specifically designed for testing HTTP APIs. It is built on top of the SuperAgent library and is used to perform requests to the API, simulating client interactions, and asserting the responses.
+		- Jest: Jest is a general-purpose testing framework developed by Facebook. It is suitable for testing JavaScript and React applications, including unit tests, integration tests, and snapshot tests. It is not limited to testing APIs.
+	- Features:
+		- Supertest: Supertest is focused on providing a fluent and expressive way to test APIs. Its main features include the ability to:
+			- Make requests (GET, POST, PUT, DELETE, etc.) to API endpoints.
+			- Chain assertions on the response object (e.g., status code, headers, body).
+			- Test authentication and other middleware functions.
+		-Jest: Jest provides a wide range of features that make it a powerful testing framework, such as:
+			- Built-in test runner and assertion library.
+			- Mocking and spying capabilities for functions and modules.
+			- Snapshot testing for UI components.
+			- Parallel test execution and intelligent test scheduling.
+			- Code coverage reports.
+			- Zero configuration for most projects.
+	- Integration:
+		- Supertest can be used in conjunction with Jest. While Supertest is responsible for making API requests and asserting the responses, Jest can be used to manage the overall testing process, handle test cases, and provide advanced features such as mocking and spying.
+	- Popularity and Community Support:
+		- Supertest is a popular library for API testing and is widely used in the JavaScript community.
+		- Jest has gained significant traction in recent years, becoming one of the most popular testing frameworks for JavaScript and React applications.
+	- In summary, Supertest and Jest are not competing libraries but rather complementary tools. Supertest is focused on API testing, while Jest is a general-purpose testing framework. They can be used together to create a robust testing suite for your JavaScript applications.

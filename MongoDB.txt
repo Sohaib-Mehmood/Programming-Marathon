@@ -140,11 +140,11 @@ Aggregation Pipeline:
 
 
 does all the queries in mongodb starts with await?
-No, not all queries in MongoDB start with await. The use of await depends on the context in which the query is executed.
+    - No, not all queries in MongoDB start with await. The use of await depends on the context in which the query is executed.
 
-In MongoDB, the await keyword is typically used when executing asynchronous operations, such as querying a database using an asynchronous driver or using the async/await syntax in JavaScript.
+    - In MongoDB, the await keyword is typically used when executing asynchronous operations, such as querying a database using an asynchronous driver or using the async/await syntax in JavaScript.
 
-For example, if you are using the official MongoDB Node.js driver and executing a query using an asynchronous method, such as findOne, then you would use await to wait for the result to be returned:
+    - For example, if you are using the official MongoDB Node.js driver and executing a query using an asynchronous method, such as findOne, then you would use await to wait for the result to be returned:
 
 csharp
 Copy code
@@ -159,51 +159,43 @@ collection.findOne({ name: "John" }, function(err, result) {
 So, it depends on how you are executing the query and whether you are using an asynchronous API or not.
 
 
-
-
-Sohaib Mehmood
 what is transaction in mongodb?
-In MongoDB, a transaction is a set of operations that are executed as a single, atomic unit of work. Transactions provide a way to group multiple write operations into a single logical unit, such that either all of the operations succeed or none of them do. This ensures data consistency and integrity, especially in complex multi-document updates.
+    - In MongoDB, a transaction is a set of operations that are executed as a single, atomic unit of work. Transactions provide a way to group multiple write operations into a single logical unit, such that either all of the operations succeed or none of them do. This ensures data consistency and integrity, especially in complex multi-document updates.
 
-MongoDB introduced multi-document transactions in version 4.0, which allows developers to execute operations that involve multiple documents and collections, across multiple databases if necessary, as a single transaction.
+    - MongoDB introduced multi-document transactions in version 4.0, which allows developers to execute operations that involve multiple documents and collections, across multiple databases if necessary, as a single transaction.
 
-Transactions in MongoDB use the two-phase commit protocol to ensure that all the operations in the transaction are either committed or rolled back as a single unit of work. The two-phase commit protocol involves a prepare phase, where the transaction is recorded, and a commit phase, where the transaction is either committed or rolled back based on the outcome of the prepare phase.
+    - Transactions in MongoDB use the two-phase commit protocol to ensure that all the operations in the transaction are either committed or rolled back as a single unit of work. The two-phase commit protocol involves a prepare phase, where the transaction is recorded, and a commit phase, where the transaction is either committed or rolled back based on the outcome of the prepare phase.
 
-To use transactions in MongoDB, you need to start a session and specify the operations to be executed within that session. Once the session is started, you can use the withTransaction method to execute a transaction, passing in a callback function that contains the operations to be executed. If any of the operations fail, the transaction will be rolled back and an error will be returned.
+    - To use transactions in MongoDB, you need to start a session and specify the operations to be executed within that session. Once the session is started, you can use the withTransaction method to execute a transaction, passing in a callback function that contains the operations to be executed. If any of the operations fail, the transaction will be rolled back and an error will be returned.
 
 Here is an example of how to use transactions in MongoDB:
 
-python
-Copy code
-const session = client.startSession();
+    - const session = client.startSession();
 
-session.withTransaction(async () => {
-  await collection1.updateOne({ _id: 1 }, { $set: { name: "John" } });
-  await collection2.deleteOne({ _id: 2 });
-});
+    - session.withTransaction(async () => {
+        await collection1.updateOne({ _id: 1 }, { $set: { name: "John" } });
+        await collection2.deleteOne({ _id: 2 });
+     });
 
-session.end();
-In this example, a session is started using the startSession method, and a transaction is executed using the withTransaction method. The transaction includes two operations, one that updates a document in collection1 and another that deletes a document in collection2. If both operations succeed, the transaction will be committed as a single unit of work. If either operation fails, the transaction will be rolled back and an error will be returned. Finally, the session is ended using the end method.
+    session.end();
+    - In this example, a session is started using the startSession method, and a transaction is executed using the withTransaction method. The transaction includes two operations, one that updates a document in collection1 and another that deletes a document in collection2. If both operations succeed, the transaction will be committed as a single unit of work. If either operation fails, the transaction will be rolled back and an error will be returned. Finally, the session is ended using the end method.
 
 
-
-
-Sohaib Mehmood
 middlewares in mongodb
 
-In MongoDB, middlewares are functions that can be executed before or after certain database operations. Middlewares allow developers to add custom logic to certain events in the database lifecycle, such as document validation, query execution, and more.
+    - In MongoDB, middlewares are functions that can be executed before or after certain database operations. Middlewares allow developers to add custom logic to certain events in the database lifecycle, such as document validation, query execution, and more.
 
-MongoDB supports middlewares through a feature called "hooks". Hooks are functions that are executed before or after certain operations, and they can be defined for a specific collection or globally for all collections in a database. There are four types of hooks in MongoDB:
+    - MongoDB supports middlewares through a feature called "hooks". Hooks are functions that are executed before or after certain operations, and they can be defined for a specific collection or globally for all collections in a database. There are four types of hooks in MongoDB:
 
-Document middleware: These hooks are executed before or after certain document operations, such as save, validate, and remove. Document middleware can be used to add custom validation logic, modify document data, or execute other operations related to the document being saved or removed.
+    - Document middleware: These hooks are executed before or after certain document operations, such as save, validate, and remove. Document middleware can be used to add custom validation logic, modify document data, or execute other operations related to the document being saved or removed.
 
-Query middleware: These hooks are executed before or after certain query operations, such as find, findOne, and update. Query middleware can be used to add custom filters to the query, modify the query options, or execute other operations related to the query being executed.
+    - Query middleware: These hooks are executed before or after certain query operations, such as find, findOne, and update. Query middleware can be used to add custom filters to the query, modify the query options, or execute other operations related to the query being executed.
 
-Aggregate middleware: These hooks are executed before or after certain aggregate operations, such as aggregate, count, and group. Aggregate middleware can be used to add custom aggregation stages, modify the pipeline options, or execute other operations related to the aggregation being executed.
+    - Aggregate middleware: These hooks are executed before or after certain aggregate operations, such as aggregate, count, and group. Aggregate middleware can be used to add custom aggregation stages, modify the pipeline options, or execute other operations related to the aggregation being executed.
 
-Model middleware: These hooks are executed before or after certain model operations, such as create, findOne, and findById. Model middleware can be used to add custom logic to model operations, such as transforming the data before saving it to the database.
+    - Model middleware: These hooks are executed before or after certain model operations, such as create, findOne, and findById. Model middleware can be used to add custom logic to model operations, such as transforming the data before saving it to the database.
 
-Here is an example of how to define document middleware in MongoDB using Mongoose, a popular MongoDB Object Document Mapper (ODM) for Node.js:
+    - Here is an example of how to define document middleware in MongoDB using Mongoose, a popular MongoDB Object Document Mapper (ODM) for Node.js:
 
 javascript
 Copy code
@@ -314,30 +306,25 @@ bookSchema.pre('create', function(next, book) {
 });
 
 const Book = mongoose.model('Book', bookSchema);
-In this example, a pre hook is defined for the create operation on the bookSchema schema. This hook is executed before the document is saved to the database, and it sets the publishedDate to the current date if it's not specified in the document.
+    - In this example, a pre hook is defined for the create operation on the bookSchema schema. This hook is executed before the document is saved to the database, and it sets the publishedDate to the current date if it's not specified in the document.
 
 
+what is aggregation pipeline in mongodb?
+    - The aggregation pipeline in MongoDB is a framework for data aggregation that allows you to process and transform data in a collection through a series of stages. The pipeline consists of a sequence of stages, where each stage performs a specific operation on the input documents and passes the results to the next stage.
 
+    - Each stage in the pipeline is a document that describes an operation to perform on the input documents. The pipeline stages can include operations such as filtering, grouping, sorting, projecting, and calculating new fields.
 
-Sohaib Mehmood
-what is aggregation pipleline in mongodb?
-The aggregation pipeline in MongoDB is a framework for data aggregation that allows you to process and transform data in a collection through a series of stages. The pipeline consists of a sequence of stages, where each stage performs a specific operation on the input documents and passes the results to the next stage.
+    - Here's an example aggregation pipeline that demonstrates the use of some of the most common pipeline stages:
 
-Each stage in the pipeline is a document that describes an operation to perform on the input documents. The pipeline stages can include operations such as filtering, grouping, sorting, projecting, and calculating new fields.
-
-Here's an example aggregation pipeline that demonstrates the use of some of the most common pipeline stages:
-
-php
-Copy code
-db.sales.aggregate([
-  { $match: { date: { $gte: ISODate("2021-01-01"), $lt: ISODate("2022-01-01") } } },
-  { $unwind: "$items" },
-  { $group: { _id: "$items.product", totalSales: { $sum: "$items.quantity" } } },
-  { $sort: { totalSales: -1 } },
-  { $limit: 10 },
-  { $project: { _id: 0, product: "$_id", totalSales: 1 } }
-])
-In this example, the pipeline consists of six stages:
+        db.sales.aggregate([
+          { $match: { date: { $gte: ISODate("2021-01-01"), $lt: ISODate("2022-01-01") } } },
+          { $unwind: "$items" },
+          { $group: { _id: "$items.product", totalSales: { $sum: "$items.quantity" } } },
+          { $sort: { totalSales: -1 } },
+          { $limit: 10 },
+          { $project: { _id: 0, product: "$_id", totalSales: 1 } }
+        ])
+    - In this example, the pipeline consists of six stages:
 
 $match: filters the input documents to only include sales that occurred between January 1, 2021 and December 31, 2021.
 $unwind: deconstructs the items array in each document, creating a separate document for each item in the array.
@@ -347,84 +334,63 @@ $limit: limits the results to the top 10 products by total quantity sold.
 $project: projects only the product and totalSales fields in the output documents, and renames the _id field to product.
 
 
-
-Sohaib Mehmood
 aggregation lookup vs populate?
-Both aggregation $lookup and populate are used in MongoDB to link documents from multiple collections together. However, there are some differences between the two approaches.
-
-$lookup is an aggregation pipeline stage that performs a left outer join between two collections based on a specified local field in the input documents and a specified foreign field in the "from" collection. The output of $lookup is a new document that combines fields from both collections based on the matching criteria.
-
-populate, on the other hand, is a Mongoose feature that allows you to automatically populate referenced documents from another collection based on a specified path in the schema. It essentially replaces the _id field in the input document with the referenced document from the "from" collection.
-
-Here are some of the main differences between the two:
-
-$lookup is a more flexible and powerful approach, as it allows you to perform more complex data transformations and aggregations between multiple collections.
-populate is simpler and easier to use, as you only need to specify the path to the referenced document in the schema and Mongoose handles the rest.
-$lookup is performed as part of an aggregation pipeline, which means it can be combined with other pipeline stages to perform more advanced queries.
-populate is not performed as part of an aggregation pipeline, which means it cannot be combined with other pipeline stages.
-$lookup returns the joined documents as a new array in the output document, while populate replaces the referenced _id field with the referenced document.
-Overall, $lookup is more suitable for complex queries that require advanced data transformations and aggregations, while populate is more suitable for simpler queries that only require basic document linking.
+    - Both aggregation $lookup and populate are used in MongoDB to link documents from multiple collections together. However, there are some differences between the two approaches.
 
 
+    - lookup is a more flexible and powerful approach, as it allows you to perform more complex data transformations and aggregations between multiple collections.
+    - populate is simpler and easier to use, as you only need to specify the path to the referenced document in the schema and Mongoose handles the rest.
+    - lookup is performed as part of an aggregation pipeline, which means it can be combined with other pipeline stages to perform more advanced queries.
+    - populate is not performed as part of an aggregation pipeline, which means it cannot be combined with other pipeline stages.
+    - lookup returns the joined documents as a new array in the output document, while populate replaces the referenced _id field with the referenced document.
+    
+    - Overall, $lookup is more suitable for complex queries that require advanced data transformations and aggregations, while populate is more suitable for simpler queries that only require basic document linking.
 
 
-Sohaib Mehmood
 SQL vs. NoSQL Databases
-SQL and NoSQL databases are two types of database systems that have different data storage and retrieval models.
+    - Data modeling: SQL databases use a rigid, predefined schema to organize and store data, while NoSQL databases allow for more flexible and dynamic data models.
 
-SQL databases are relational databases that store data in tables with predefined schemas. The data is structured, and all data must be stored in a specific format in the tables. SQL databases use SQL (Structured Query Language) to manage and manipulate data. Examples of SQL databases include MySQL, PostgreSQL, Oracle, and Microsoft SQL Server.
+    - Scalability: NoSQL databases are designed to scale horizontally and can easily add more nodes to the database cluster, while SQL databases are designed to scale vertically, meaning they require more powerful hardware to handle larger data volumes.
 
-NoSQL databases, on the other hand, are non-relational databases that store data in a variety of ways, including as documents, key-value pairs, or graph databases. NoSQL databases are more flexible than SQL databases and allow for faster development and easier scalability. Examples of NoSQL databases include MongoDB, Cassandra, and Redis.
+    - Data consistency: SQL databases maintain strong consistency and ensure that data is always accurate and up-to-date, while NoSQL databases trade off some consistency for scalability and performance.
 
-Here are some of the main differences between SQL and NoSQL databases:
+    - Query language: SQL databases use SQL as a standardized query language to interact with data, while NoSQL databases use their own query languages or APIs.
 
-Data modeling: SQL databases use a rigid, predefined schema to organize and store data, while NoSQL databases allow for more flexible and dynamic data models.
+    - Use cases: SQL databases are often used for structured, transactional data such as financial data or inventory management, while NoSQL databases are better suited for unstructured or semi-structured data such as social media data, user profiles, or log files.
 
-Scalability: NoSQL databases are designed to scale horizontally and can easily add more nodes to the database cluster, while SQL databases are designed to scale vertically, meaning they require more powerful hardware to handle larger data volumes.
-
-Data consistency: SQL databases maintain strong consistency and ensure that data is always accurate and up-to-date, while NoSQL databases trade off some consistency for scalability and performance.
-
-Query language: SQL databases use SQL as a standardized query language to interact with data, while NoSQL databases use their own query languages or APIs.
-
-Use cases: SQL databases are often used for structured, transactional data such as financial data or inventory management, while NoSQL databases are better suited for unstructured or semi-structured data such as social media data, user profiles, or log files.
-
-Overall, the choice between SQL and NoSQL databases depends on the specific requirements of the application, the type of data being stored, and the scalability needs of the system.
+    - Overall, the choice between SQL and NoSQL databases depends on the specific requirements of the application, the type of data being stored, and the scalability needs of the system.
 
 
 
-
-Sohaib Mehmood
 comparison operators in mongodb
-MongoDB provides a variety of comparison operators that can be used in queries to compare values against each other. Here are some commonly used comparison operators in MongoDB:
+    - MongoDB provides a variety of comparison operators that can be used in queries to compare values against each other. Here are some commonly used comparison operators in MongoDB:
 
-$eq: Matches values that are equal to a specified value.
-Example: { age: { $eq: 30 } }
+    - $eq: Matches values that are equal to a specified value.
+        - Example: { age: { $eq: 30 } }
 
-$ne: Matches values that are not equal to a specified value.
-Example: { age: { $ne: 30 } }
+    - $ne: Matches values that are not equal to a specified value.
+        - Example: { age: { $ne: 30 } }
 
-$gt: Matches values that are greater than a specified value.
-Example: { age: { $gt: 30 } }
+    - $gt: Matches values that are greater than a specified value.
+        - Example: { age: { $gt: 30 } }
 
-$gte: Matches values that are greater than or equal to a specified value.
-Example: { age: { $gte: 30 } }
+    - $gte: Matches values that are greater than or equal to a specified value.
+        - Example: { age: { $gte: 30 } }
 
-$lt: Matches values that are less than a specified value.
-Example: { age: { $lt: 30 } }
+    - $lt: Matches values that are less than a specified value.
+        - Example: { age: { $lt: 30 } }
 
-$lte: Matches values that are less than or equal to a specified value.
-Example: { age: { $lte: 30 } }
+    - $lte: Matches values that are less than or equal to a specified value.
+        - Example: { age: { $lte: 30 } }
 
-$in: Matches any of the values specified in an array.
-Example: { status: { $in: [ "active", "pending" ] } }
+    - $in: Matches any of the values specified in an array.
+        - Example: { status: { $in: [ "active", "pending" ] } }
 
-$nin: Matches none of the values specified in an array.
-Example: { status: { $nin: [ "inactive", "expired" ] } }
+    - $nin: Matches none of the values specified in an array.
+        - Example: { status: { $nin: [ "inactive", "expired" ] } }
 
-$exists: Matches documents that contain a specific field or do not contain a specific field.
-Example: { name: { $exists: true } }
+    - $exists: Matches documents that contain a specific field or do not contain a specific field.
+        - Example: { name: { $exists: true } }
 
-$type: Matches documents that have a specific data type for a field.
-Example: { age: { $type: "number" } }
-
-These comparison operators can be used in combination with other query operators to construct more complex queries in MongoDB.
+    - $type: Matches documents that have a specific data type for a field.
+        - Example: { age: { $type: "number" } }
